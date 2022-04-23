@@ -1,7 +1,7 @@
 ﻿![alt text](https://i.postimg.cc/X7cfv1MS/logo.jpg)
 
-WDO - Web Database Objects  (Version for modHarbour V2)
-=======================================================
+Version for modHarbour V2
+=========================
 
 Módulo para trabajar con Bases de Datos / Dbf en mod_harbour
 
