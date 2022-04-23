@@ -1,0 +1,2 @@
+#	Example import dbf to mysql, uncomment
+SetEnv MHTIMEOUT 120
