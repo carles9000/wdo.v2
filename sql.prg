@@ -3,7 +3,7 @@
 //	Description: Test WDO
 //	Date.......: 28/07/2019
 //
-//	{% LoadHRB( '/lib/wdo/wdo.hrb' ) %}					//	Loading WDO lib
+//	{% mh_LoadHRB( '/lib/wdo/wdo.hrb' ) %}					//	Loading WDO lib
 //	{% HB_SetEnv( 'WDO_PATH_MYSQL', "c:/xampp/htdocs/" ) %}	//	Usuarios Xampp
 //	--------------------------------------------------------------
 
@@ -14,7 +14,7 @@ FUNCTION Main()
 		? "<b>==> Test Error de conexion...</b><br>"
 		
 		
-		o := WDO():Rdbms( 'MYSQL', "localhost", "harbour", "password", "db_zzz", 3306 )
+		o := WDO():Rdbms( 'MYSQL', "localhost", "harbour", "hb1234", "db_zzz", 3306 )
 
 		
 		IF o:lConnect
