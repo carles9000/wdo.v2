@@ -92,6 +92,78 @@
       <div id="collapse3" class="panel-collapse collapse mb-5">
         <div class="panel-body">
 		
+          <table id="mytable" >
+            <thead>
+               <tr>
+                   <th class="p-2" width="200px">Prg</th>
+                   <th class="p-2" align="center" width="50px"></th>
+                   <th class="p-2" >Descripción</th>                  
+               </tr>
+            </thead>
+			<tbody>
+			
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql.prg">sql.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql.prg')"></td>
+					<td>Test error de conexión</td>						
+				</tr>		
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql0.prg">sql0.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql0.prg')"></td>
+					<td>Test de conexión</td>						
+				</tr>					
+				
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql1.prg">sql1.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql1.prg')"></td>
+					<td>Test SELECT</td>						
+				</tr>
+				
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql2.prg">sql2.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql2.prg')"></td>
+					<td>Test gestor de errores</td>						
+				</tr>	
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql3.prg">sql3.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql3.prg')"></td>
+					<td>Test quick view select</td>						
+				</tr>		
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql4.prg">sql4.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql4.prg')"></td>
+					<td>Test insert/delete</td>						
+				</tr>
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql5.prg">sql5.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql5.prg')"></td>
+					<td>Test left join</td>						
+				</tr>	
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql6.prg">sql6.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql6.prg')"></td>
+					<td>Test speed</td>						
+				</tr>
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql7.prg">sql7_srv.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql7_srv.prg')"></td>
+					<td>Test inyeccion (backend)</td>						
+				</tr>
+
+				<tr>
+					<td class="p-2" ><a target="_blank_" href="sql8.prg">sql8.prg</a></td>
+					<td align="center" style="cursor:pointer;"><img src="image/code.png" onclick="View('sql8.prg')"></td>
+					<td>Test persistencia</td>						
+				</tr>					
+				
+			</tbody>				   
+          </table>      				
         
         </div>
       </div>
@@ -99,6 +171,50 @@
 
   </div> 
 </div> <!-- /container -->
+
+
+<div id="mycode">
+	<div id="mycodebar">
+		<img src="image/close.png" style="cursor:pointer;" onclick="EditorHide()"> 
+		<small id='filename'></small>		
+	</div>
+	<div id="code"></div>
+</div>
+
+<script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+
+	var editor 		= ace.edit("code");
+	editor.session.setMode("ace/mode/javascript");
+	editor.setTheme("ace/theme/twilight");
+	editor.getSession().setUseWorker(false);
+	editor.setOptions( { 
+		fontSize: "12pt",
+		readOnly: true,
+		selectionStyle: "text", 	//	"line"|"text"
+		highlightActiveLine: true,
+		showPrintMargin: true, 
+		printMarginColumn: 80,
+		showLineNumbers: true,
+		showGutter: true,
+		displayIndentGuides: false,
+		tooltipFollowsMouse: false,
+		enableBasicAutocompletion:true,					
+	})				
+	
+	function View( cFile ) {	
+
+		$.get( 'read.prg', cFile, function(data, status){
+			editor.setValue(data,1)
+			$('#filename').html( cFile )
+			$('#mycode').show()						
+		})
+	}
+
+	function EditorHide() {$('#mycode').hide() }
+
+</script>
 
 
 </body></html>

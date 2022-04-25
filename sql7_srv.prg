@@ -10,7 +10,7 @@
 
 function Main()
 
-	local hParam, cSql
+	local hParam, cSql, cUser, cPsw
 
     if AP_Method() != "POST"
 		? "This example is used to review POST sent values from sql7 example"
@@ -30,8 +30,14 @@ function Main()
 		RETU NIL
 	ENDIF
 	
-	cSql := "select * from users where user = '" + hParam[ 'user' ] + "' and psw = '" + hParam[ 'psw' ] + "' " 
-	//cSql := 'select * from users where user = "' + hParam[ 'user' ] + '" and psw = "' + hParam[ 'psw' ] + '" ' 
+	 
+	if MyControlInjection( hParam[ 'user'] ) .or. MyControlInjection( hParam[ 'psw'] )
+	
+		? "Don't be cruel..."
+		retu nil		
+	endif 
+	
+	cSql := "select * from users where user = '" + hParam[ 'user' ] + "' and psw = '" + hParam[ 'psw' ] + "' " 	
 	
 	? '<b>Sql: </b>' + cSql
 	
@@ -51,3 +57,20 @@ function Main()
 	
 
 return nil
+
+function MyControlInjection( uValue )
+
+	local lInject := .f. 
+
+	uValue := upper(uValue)
+	
+	if 'DROP'   $ uValue .or. ;
+	   'DELETE' $ uValue .or. ;
+	   'INSERT' $ uValue .or. ;
+	   'UPDATE' $ uValue 	
+
+		lInject := .t. 
+		
+	endif 
+	
+retu lInject 

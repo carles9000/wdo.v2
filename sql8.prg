@@ -16,9 +16,6 @@ FUNCTION Main()
 	LOCAL o, oRs, hRes
 
 		o := MyConnect()
-	
-		o := WDO():Rdbms( 'MYSQL', "localhost", "harbour", "hb1234", "dbHarbour", 3306 )		
-		
 		
 		IF ! o:lConnect		
 			RETU NIL
