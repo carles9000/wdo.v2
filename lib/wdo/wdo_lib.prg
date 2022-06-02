@@ -14,6 +14,7 @@
 #include "hbclass.ch" 
 #include "hboo.ch"   
 #include "hbhash.ch"
+#include "common.ch"
 
 #include "wdo.prg" 					//	WDO
 #include "rdbms.prg" 				//	Base RDBMS
@@ -24,4 +25,5 @@
 #include "rdbms_mysql.prg" 			//	MySql
 //#include "rdbms_pg.prg" 			//	PostgreSql
 #include "tdataset.prg" 			//	Clase TDataset
+#include "mod.prg" 					//	Support for mod
 //	---------------------------------------------------------------------------- //

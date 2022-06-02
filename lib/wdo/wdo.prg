@@ -5,7 +5,7 @@
 	Date:......: 26/07/2019
 	--------------------------------------------------------- */
 	
-#define WDO_VERSION 		'ADO 2.1.005'
+#define WDO_VERSION 		'2.1.006'
 
 static nFWAdoMemoSizeThreshold   := 255  // Can be changed to the taste of individual programmers
 

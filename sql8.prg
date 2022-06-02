@@ -1,41 +1,51 @@
-//	--------------------------------------------------------------
+//	----------------------------------------------------------------------------
 //	Title......: WDO Web Database Objects
 //	Description: Test WDO
 //	Date.......: 28/07/2019
 //
-//	{% mh_LoadHRB( '/lib/wdo/wdo.hrb' ) %}							//	Loading WDO lib
+//	{% mh_LoadHRB( '/lib/wdo/wdo.hrb' ) %}					//	Loading WDO lib
 //	{% HB_SetEnv( 'WDO_PATH_MYSQL', "c:/xampp/htdocs/" ) %}	//	Usuarios Xampp
-//	--------------------------------------------------------------
-
+//	----------------------------------------------------------------------------
 //	Test Persistence V2 
 //	Check DbWin console
+//
+//	You can test persistence of this way:
+//	c:\xampp\apache\bin\ab -n100 -c10 -l localhost/master/wdo.v2/sql8.prg
+//	----------------------------------------------------------------------------
 
 
 FUNCTION Main()
 
-	LOCAL o, oRs, hRes
+	LOCAL o, cSql, oRs, hRes
+	LOCAL nMin := HB_RandomInt( 1, 100 )
+	
+	//	-----------------------------------------------------------------------
+	//	Sobre MySql
+	//	-----------------------------------------------------------------------
+	//	El cliente C de mysql tiene una limitacion que NO es thread safe, osea 
+	//	no puede ser concurrente. en el caso de que en algun momento haya mas 
+	//	de alguna accion con el mismo identificador de la conexion nos puede 
+	//	dar error. 
+	//	Afortunadamente con V2 podemos tener nuestra persistencia entre VMs. 
+	//	Esto nos permite tener un control por ejemplo con un pool de conexiones.
+	//	Para poder gestionar nuestra conexion de mysql, usaremos la funcion:
+	//
+	//	mh_Pool( <cPool_Name>, <bInit> )
+	//
+	//	Esta funciona buscara en nuestro pool de conexiones <cPool_Name>, si esta
+	//	vacio ejecutará en codeblock <bInit> para inicializar la conexion o lo 
+	//	que deseemos.
+	//	-----------------------------------------------------------------------	
 
-		o := MyConnect()
+		o := mh_Pool( 'mysql', {|| MyOpen() } )
 		
-		IF ! o:lConnect		
-			RETU NIL
-		ENDIF
-		
-		?? '<h3>Data Base Customer</h3><hr>'
-		
-		cSql 	:= "SELECT count(*) as total FROM customer"
-		
-		hRes 	:= o:Query( cSql  )
-		oRs 	:= o:Fetch_Assoc( hRes )
-		
-		? '<b>Registros Totales: </b>', oRs[ 'total' ]		
+	//	-----------------------------------------------------------------------	
 	
 
 		cSql := "SELECT * FROM customer c " +;
 		        "LEFT JOIN states s ON s.code = c.state " +;
-				"WHERE ( c.state = 'LA' OR c.state = 'AK' ) and c.age >= 58 and c.age <= 60 and c.married = 1 " +;
-				"ORDER by first	"		
-				
+				"WHERE ( c.state = 'LA' OR c.state = 'AK' ) and c.age >= " + str(nMin) + " and c.age <= " + str( nMin+10) + " and c.married = 1 " +;
+				"ORDER by first	"						
 				
 		? '<br><b>Sql: </b>' , cSql
 		
@@ -44,37 +54,22 @@ FUNCTION Main()
 			? '<br><b>Total Select: </b>', o:Count( hRes )
 		
 			aData := o:FetchAll( hRes )
-
+			
 			o:View( o:DbStruct(),	aData )
 		
-		ENDIF				
-		
+		ENDIF						
 		
 RETU NIL
 
-function MyConnect()
+//	--------------------------------------------------------------------------------------	//
 
-	local oConn 
+function MyOpen() 
 
-    IF mh_HashGet( 'oMySql' ) != NIL
-
-		oConn := mh_HashGet( 'oMySql' )
-		
-		_d( 'Recover connexion from persistence system' )
-				
-    ELSE			
-		
-		oConn := WDO():Rdbms( 'MYSQL', "localhost", "harbour", "hb1234", "dbHarbour", 3306 )
-		
-		IF ! oConn:lConnect
-			? 'Error: ', oConn:mysql_error()		
-			RETU NIL
-		ENDIF
-		
-		mh_HashSet( 'oMySql', oConn )	
-		
-		_d( 'Create connexion and save in persistence' )
-		
-    ENDIF	
-
-retu oConn 
+	local oConn := WDO():Rdbms( 'MYSQL', "localhost", "harbour", "hb1234", "dbHarbour", 3306 )
+	
+	IF ! oConn:lConnect
+		? 'Error: ', oConn:mysql_error()		
+		retu nil
+	ENDIF			
+	
+retu oConn  
