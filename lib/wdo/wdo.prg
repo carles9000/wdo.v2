@@ -5,7 +5,7 @@
 	Date:......: 26/07/2019
 	--------------------------------------------------------- */
 	
-#define WDO_VERSION 		'2.1.006'
+#define WDO_VERSION 		'2.1.007'
 
 static nFWAdoMemoSizeThreshold   := 255  // Can be changed to the taste of individual programmers
 
@@ -61,3 +61,6 @@ METHOD ADO( cServer, cUsername, cPassword, cDatabase, lAutoOpen ) CLASS WDO
 RETU oAdo
 
 #endif // WITH_ADO
+
+function WDO_Version() ; retu WDO_VERSION
+

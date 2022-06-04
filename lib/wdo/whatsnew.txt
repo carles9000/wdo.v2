@@ -1,0 +1,7 @@
+06/04/2022 => 2.1.007
+=====================
+New		Pool for persistence. 
+
+		See examples: sql8.prg and sql8b.prg
+		
+		

@@ -34,20 +34,20 @@ function mh_Pool( cName, bInit )
 			if valtype( hPool ) <> 'H'
 				hPool := {=>}
 				mh_HashSet( cName, hPool )
-//_d( 'Inicio HASH con entrada de ' + cVM)				
+//_d( 'Inicio HASH para => ' + cVM)				
 			endif	
 
 		//	Si no existe objeto en la VM daremos de alta
 		
 			if HB_HHasKey( hPool, cVM )
 			
-//_d( 'Recupera objeto de VM ' + cVM )			
+//_d( 'Recupera objeto de => ' + cVM )			
 
 				o := hPool[ cVM ]
 				
 			else 
 			
-//_d( 'Inicio conexion para la VM ' + cVM )	
+//_d( 'Inicio conexion => ' + cVM )	
 
 				o := eval( bInit )
 				
