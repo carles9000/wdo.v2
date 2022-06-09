@@ -55,9 +55,13 @@ FUNCTION Main()
 		
 			? '<br><b>Total Select: </b>', o:Count( hRes )
 		
-			aData := o:FetchAll( hRes )
+			//o:View( o:DbStruct(),	aData )
 			
-			o:View( o:DbStruct(),	aData )
+			while ! empty( aData := o:Fetch( hRes ) )			
+			
+				? aData
+				
+			end 
 		
 		ENDIF						
 		
