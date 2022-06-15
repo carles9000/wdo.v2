@@ -43,6 +43,7 @@ FUNCTION Main()
 		
 	//	-----------------------------------------------------------------------	
 	
+		? '<b>Version V2:</b> ', mh_modversion()
 		? '<b>Version WDO:</b> ', wdo_version()
 		
 		cSql := "SELECT * FROM customer c " +;
@@ -54,8 +55,7 @@ FUNCTION Main()
 		
 		IF !empty( hRes := o:Query( cSql  ) )
 	
-			? '<br><b>Total Select: </b>', o:Count( hRes )
-		
+			? '<br><b>Total Select: </b>', o:Count( hRes )		
 	
 			//o:View( o:DbStruct(),	aData )			
 			
@@ -64,8 +64,7 @@ FUNCTION Main()
 				? aData
 				//ap_echo( hb_JsonEncode( aData, .T. ) )								
 			end 
-		
-		
+
 		ENDIF						
 		
 RETU NIL
