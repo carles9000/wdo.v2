@@ -19,6 +19,7 @@ FUNCTION Main()
 	LOCAL o, cSql, oRs, hRes
 	LOCAL nMin := HB_RandomInt( 1, 100 )
 	
+	
 	//	-----------------------------------------------------------------------
 	//	Sobre MySql
 	//	-----------------------------------------------------------------------
@@ -52,16 +53,18 @@ FUNCTION Main()
 		? '<br><b>Sql: </b>' , cSql
 		
 		IF !empty( hRes := o:Query( cSql  ) )
-		
+	
 			? '<br><b>Total Select: </b>', o:Count( hRes )
 		
-			//o:View( o:DbStruct(),	aData )
+	
+			//o:View( o:DbStruct(),	aData )			
 			
-			while ! empty( aData := o:Fetch( hRes ) )			
+			while ! empty( aData := o:Fetch_Assoc( hRes ) )		//	o:Fetch( hRes )	
 			
 				? aData
-				
+				//ap_echo( hb_JsonEncode( aData, .T. ) )								
 			end 
+		
 		
 		ENDIF						
 		

@@ -8,8 +8,8 @@
 
 
 	$nAge  = random_int( 1, 99 );
-
-	//oConn := WDO():Rdbms( 'MYSQL', "localhost", "harbour", "hb1234", "dbHarbour", 3306 )
+	
+	
 	$hLink = mysqli_connect( 'localhost', 'harbour', 'hb1234', 'dbHarbour', 3306 );
 	
 
@@ -25,16 +25,14 @@
 		$nRecCount = mysqli_num_rows( $hRs );		
 		
 		echo '<br><b>Total Select: </b>' . $nRecCount . '<br>';				
-		
+				
 		while ( $aRow = mysqli_fetch_array( $hRs, MYSQLI_ASSOC ) ) {
 		
 			echo print_r( $aRow, true );
-			echo '<br>';
-			
-		}		
-	
+			echo '<br>';			
+		}
+		
 	}
-	
 	
 
 ?>
