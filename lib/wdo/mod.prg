@@ -6,7 +6,7 @@
 */
 
 
-function mh_Pool( cName, bInit )
+function mh_Pool( cName, bInit, lForce )
 
 	local nVM 	:= mh_UsedVm()
 	local o		:= nil
@@ -14,10 +14,12 @@ function mh_Pool( cName, bInit )
 	
 	DEFAULT cName TO ''
 	DEFAULT bInit TO {|| nil }
+	DEFAULT lForce TO .F.
 	
 	if empty( cName )
 		retu nil 
 	endif		
+
 
 //_d( 'VM ' + str(nVM+1) )	
 
@@ -39,7 +41,7 @@ function mh_Pool( cName, bInit )
 
 		//	Si no existe objeto en la VM daremos de alta
 		
-			if HB_HHasKey( hPool, cVM )
+			if HB_HHasKey( hPool, cVM ) .and. !lForce
 			
 //_d( 'Recupera objeto de => ' + cVM )			
 

@@ -1,3 +1,10 @@
+18/06/2022 => 2.1.008
+=====================
+Enchanced 	mh_Pool( cName, bInit, lForce ), new parameter lForce. 
+			if we have a connection in resistance in our pool, we can force a reconnection
+
+
+
 06/04/2022 => 2.1.007
 =====================
 New		Pool for persistence. 

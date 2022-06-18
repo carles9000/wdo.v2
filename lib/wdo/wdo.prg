@@ -5,7 +5,7 @@
 	Date:......: 26/07/2019
 	--------------------------------------------------------- */
 	
-#define WDO_VERSION 		'2.1.007'
+#define WDO_VERSION 		'2.1.008'
 
 static nFWAdoMemoSizeThreshold   := 255  // Can be changed to the taste of individual programmers
 
